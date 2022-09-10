@@ -8,7 +8,7 @@ import {ethers} from "ethers"
 import ReactDOM from "react-dom"
 
 let web3Modal;
-let respuesta = "Valu"
+let respuesta = "Value"
 
 const providerOptions = {
   walletconnect: {
