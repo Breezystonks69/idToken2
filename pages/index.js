@@ -3,7 +3,7 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import Web3Modal from "web3modal"
 import WalletConnectProvider from '@walletconnect/web3-provider'
-import React, {useEffect, useState} from "react"
+import React, {useState} from "react"
 import {ethers} from "ethers"
 import ReactDOM from "react-dom"
 
@@ -30,15 +30,11 @@ if (typeof window !== "undefined") {
 export default function Home() {
 
   const [isConnected, setIsConnected] = useState(false);
-  const [hasMetamask, setHasMetamask] = useState(false);
+  
   const [signer, setSigner] = useState(undefined);
   
 
-  useEffect(() => {
-    if (typeof window.ethereum !== "undefined") {
-      setHasMetamask(true);
-    }
-  });
+  
 
   async function connect() {
     
