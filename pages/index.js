@@ -53,7 +53,6 @@ export default function Home() {
   }
 
   async function execute() {
-    if (typeof window.ethereum !== "undefined") {
       const contractAddress = "0xD6c6dbD21A4F5eF492F5C175494C0b8F6D6c7c44";
       const abi = [
         {
@@ -89,13 +88,9 @@ export default function Home() {
       } catch (error) {
         console.log(error);
       }
-    } else {
-      console.log("Please install MetaMask");
-    } 
   }
 
   async function queNum() {
-    if (typeof window.ethereum !== "undefined") {
       const contractAddress = "0xD6c6dbD21A4F5eF492F5C175494C0b8F6D6c7c44";
       const abi = [
         {
@@ -133,9 +128,6 @@ export default function Home() {
       } catch (error) {
         console.log(error);
       }
-    } else {
-      console.log("Please install MetaMask");
-    } 
   } 
 
 
