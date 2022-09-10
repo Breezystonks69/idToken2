@@ -116,17 +116,19 @@ export default function Home() {
           "type": "function"
         }
       ]
-      const contractTwo = new ethers.Contract(contractAddress, abi, signer);
+      const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
        
-        const respuesta = await contractTwo.retrieve();
+        const respuesta = await contract.retrieve();
         ReactDOM.render(<div>{respuesta - 0}</div>, document.getElementById("pap"))
       } catch (error) {
         console.log(error);
       }
   } 
 
-
+  function testit () {
+    ReactDOM.render(<div>7</div>, document.getElementById("tete"))
+  }
 
 
   return (
@@ -150,7 +152,7 @@ export default function Home() {
     </div>
 
     <div>
-        <button>Revoke</button>
+        <button id="tete" onClick={() => testit()}>Revoke</button>
         <button id="pap">{respuesta}</button>
     </div>
     
