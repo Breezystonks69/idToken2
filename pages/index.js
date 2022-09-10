@@ -14,7 +14,7 @@ const providerOptions = {
   walletconnect: {
     package: WalletConnectProvider, // required
     options: {
-      rpc: "https://rinkeby.infura.io/v3/711081a7c4fb42409319962ba07322fc" , // required
+      rpc: { 42: "https://rinkeby.infura.io/v3/711081a7c4fb42409319962ba07322fc" }, // required
     },
   },
 };
