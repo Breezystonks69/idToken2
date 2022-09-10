@@ -41,7 +41,7 @@ export default function Home() {
   });
 
   async function connect() {
-    
+    if (typeof window.ethereum !== "undefined") {
       try {
         const web3ModalProvider = await web3Modal.connect();
         setIsConnected(true);
@@ -50,6 +50,9 @@ export default function Home() {
       } catch (e) {
         console.log(e);
       }
+    } else {
+      setIsConnected(false);
+    }
   }
 
   async function execute() {
@@ -153,7 +156,7 @@ export default function Home() {
             ) : (
               <input type="button" id="upper" value="Connect Wallet" onClick={() => connect()}></input>
             )
-           }
+          }
     </header>
 <div class="container">
     <div>
