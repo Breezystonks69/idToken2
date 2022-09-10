@@ -147,15 +147,13 @@ export default function Home() {
         <input type="button" id="upper" value="Hello"></input>
         <input type="button" id="upper" value="White Paper"></input>
         <input type="button" id="upper" value="GLR"></input>
-        {hasMetamask ? (
+        {
             isConnected ? (
               <input type="button" id="upper" value="Connected" ></input>
             ) : (
               <input type="button" id="upper" value="Connect Wallet" onClick={() => connect()}></input>
             )
-          ) : (
-            "Please install metamask"
-          )}
+           }
     </header>
 <div class="container">
     <div>
