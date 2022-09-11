@@ -27,7 +27,8 @@ body{
 .container{
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+ 
+  
 }
 
 header{
@@ -43,21 +44,52 @@ h1{
   margin: 20px;
 }
 
+
+
 button{
   font-family: 'Verdana';
   font-size: 4vh;
   height: 17vh;
   width: 20vh;
-  text-align: center;
+  justify-content: center;
   margin-top: 1rem;
-  margin-left: 50%;
-  transform: translate(-50%, 0%);
+  display: flex;
+  flex-direction: column;
+
   background-color: rgb(228, 253, 253);
   border: rgba(86, 42, 247, 0.788) solid 2px;
   border-radius: 20px;
   
   
 }
+
+#resp, #pap, #respStore, #respu, #papp, #col1, #col2, #col3, #col4, #col5, #col6, #dol1, #dol2, #dol3, #dol4, #dol5, #dol6{
+  font-family: 'Verdana';
+  font-size: 4vh;
+  height: 17vh;
+  width: 20vh;
+  text-align: center;
+  justify-content: center;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(228, 253, 253);
+  border: rgba(86, 42, 247, 0.788) solid 2px;
+  border-radius: 20px;
+  
+  
+}
+
+#dis{
+  
+    height: 17vh;
+    width: 20vh;
+    margin-top: 1rem;
+    background-color: rgba(228, 253, 253, 0);
+    border: solid black 1px;
+  }
+
+
 
 button:hover{
   background-color: rgba(15, 180, 180, 0.637);
