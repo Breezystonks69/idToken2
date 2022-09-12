@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import Web3Modal from "web3modal"
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import React, {useState} from "react"
@@ -8,8 +5,6 @@ import {ethers} from "ethers"
 import ReactDOM from "react-dom"
 
 let web3Modal;
-let respuesta = ""
-
 
 let contractAddress_ ="0x7070D932F88be3C757Bb1165a91e7107714fCED9"
 let abi_ = [
