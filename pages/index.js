@@ -285,7 +285,36 @@ export default function Home() {
       } catch (error) {
         console.log(error);
       }
-  } 
+  }
+  
+  async function att() {
+    const contractAddress = contractAddress_;
+    const abi = abi_
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    try {
+
+     let theAddress = document.getElementById("tespo1").value
+     let index = document.getElementById("tespo2").value
+     console.log(theAddress)
+     console.log(index)
+     
+     let respuesta = await contract.Attestation(theAddress, index)
+     console.log(respuesta)
+     
+      ReactDOM.render(<div>
+        {respuesta[0]}
+      </div>,
+      document.getElementById("tespo3"))
+
+      ReactDOM.render(<div>
+        {respuesta[1]}
+      </div>,
+      document.getElementById("tespo4"))
+
+    } catch (error) {
+      console.log(error);
+    }
+} 
 
   return (
     <div>
@@ -305,47 +334,47 @@ export default function Home() {
     <div id="botones">
         <button onClick={() => execute()}>Register ID</button>
         <button onClick={() => regAtt()}>Register Attestation</button>
-        <button>Attestation </button>
+        <button onClick={() => att()}>Attestation </button>
         <button>Attestation Log</button>
         <button onClick={() => ID()}>ID</button>
     </div>
     <div>
         <input type="text" id="col1" placeholder='Name'></input>
         <input type="text" id="dol1" placeholder="Type"></input>
-        <div id='dis'></div>
+        <input type="text" id='tespo1' placeholder="address"></input>
         <div id="dis"></div>
         <input type="text" id="respo1" placeholder="address"></input>
     </div>
     <div>
-    <input type="text" id="col2" placeholder='Email'></input>
+        <input type="text" id="col2" placeholder='Email'></input>
         <input type="text" id="dol2" placeholder="to"></input>
-        <div id='dis'></div>
+        <input type="number" id='tespo2' placeholder="index"></input>
         <div id="dis"></div>
         <div id="respo2"></div>
     </div>
     <div>
-    <input type="number" id="col3" placeholder='Number'></input>
+        <input type="number" id="col3" placeholder='Number'></input>
         <div id="dis"></div>
-        <div id='dis'></div>
+        <div id='tespo3'></div>
         <div id="dis"></div>
         <div id="respo3"></div>
     </div>
     <div>
-    <input type="text" id="dis" ></input>
+        <input type="text" id="dis" ></input>
         <div id="dis"></div>
-        <div id='dis'></div>
+        <div id='tespo4'></div>
         <div id="dis"></div>
         <div id="respo4"></div>
     </div>
     <div>
-    <input type="text" id="dis"></input>
+        <input type="text" id="dis"></input>
         <div id="dis"></div>
         <div id='dis'></div>
         <div id="dis"></div>
         <div id="dis"></div>
     </div>
     <div>
-    <input type="number" id="dis"></input>
+        <input type="number" id="dis"></input>
         <div id="dis"></div>
         <div id='dis'></div>
         <div id="dis"></div>
