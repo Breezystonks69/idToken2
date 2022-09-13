@@ -6,81 +6,186 @@ import ReactDOM from "react-dom"
 
 let web3Modal;
 
-let contractAddress_ ="0x7070D932F88be3C757Bb1165a91e7107714fCED9"
+let contractAddress_ ="0x60235224F2301CDFA14464f1dB2788375bF9B55c"
 let abi_ = [
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "id",
-        "type": "address"
-      }
-    ],
-    "name": "getStudent",
-    "outputs": [
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "string"
-      },
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": false,
-    "inputs": [
-      {
-        "name": "name",
-        "type": "string"
-      },
-      {
-        "name": "birthdate",
-        "type": "string"
-      },
-      {
-        "name": "department",
-        "type": "string"
-      },
-      {
-        "name": "location",
-        "type": "string"
-      },
-      {
-        "name": "email",
-        "type": "string"
-      },
-      {
-        "name": "mobile_no",
-        "type": "uint256"
-      }
-    ],
-    "name": "registerPerson",
-    "outputs": [],
-    "payable": false,
-    "stateMutability": "nonpayable",
-    "type": "function"
-  }
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_Atype",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_to",
+				"type": "address"
+			}
+		],
+		"name": "RegisterAttestation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_number",
+				"type": "uint256"
+			}
+		],
+		"name": "RegisterIDInfo",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "Attestation",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "Atype",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "AttestationLog",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "Atype",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "time",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "GetAttestatioLog",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "Atype",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "time",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "to",
+						"type": "address"
+					}
+				],
+				"internalType": "struct Registry.AttestationInfo[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "ID",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "number",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
 ]
 
 const providerOptions = {
@@ -125,67 +230,62 @@ export default function Home() {
         const lal1 = document.getElementById("col1").value
         const lal2 = document.getElementById("col2").value
         const lal3 = document.getElementById("col3").value
-        const lal4 = document.getElementById("col4").value
-        const lal5 = document.getElementById("col5").value
-        const lal6 = document.getElementById("col6").value
         
-        let respuesta = await contract.registerPerson(lal1, lal2, lal3, lal4, lal5, lal6);
+        
+        let respuesta = await contract.RegisterIDInfo(lal1, lal2, lal3);
 
       } catch (error) {
         console.log(error);
       }
   }
 
-  async function queNum() {
+  async function regAtt() {
+    const contractAddress = contractAddress_;
+    const abi = abi_
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    try {
+      
+      const lal1 = document.getElementById("dol1").value
+      const lal2 = document.getElementById("dol2").value
+      
+      let respuesta = await contract.RegisterAttestation(lal1, lal2);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function ID() {
       const contractAddress = contractAddress_;
       const abi = abi_
       const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
 
-       let myAddress = await signer.getAddress()
-       let respuesta = await contract.getStudent(myAddress)
+       let myAddress = document.getElementById("respo1").value
+       console.log(myAddress)
+       let respuesta = await contract.ID(myAddress)
        
        
        
         ReactDOM.render(<div>
           {respuesta[0]}
         </div>,
-        document.getElementById("dol1"))
-
-        ReactDOM.render(
-          <span>{respuesta[1]}</span>,
-        
-         document.getElementById("dol2"))
+        document.getElementById("respo2"))
 
         ReactDOM.render(<div>
-          {respuesta[2]}
+          {respuesta[1]}
         </div>,
-        document.getElementById("dol3"))
-    
-        ReactDOM.render(<div>
-          {respuesta[3]}
-        </div>,
-        document.getElementById("dol4"))
+        document.getElementById("respo3"))
 
         ReactDOM.render(<div>
-          {respuesta[4]}
+          {respuesta[2] - 0}
         </div>,
-        document.getElementById("dol5"))
-        
-        
-        ReactDOM.render(<div>
-          {respuesta[5] - 0}
-        </div>,
-        document.getElementById("dol6"))
-        
-
-
+        document.getElementById("respo4"))
 
       } catch (error) {
         console.log(error);
       }
   } 
-
 
   return (
     <div>
@@ -202,49 +302,57 @@ export default function Home() {
           }
     </header>
 <div class="container">
-    <div>
-        <button onClick={() => execute()}>Register</button>
-        <button onClick={() => queNum()}>call data</button>
-        <button>shhh</button>
-        <button>shhhh</button>
+    <div id="botones">
+        <button onClick={() => execute()}>Register ID</button>
+        <button onClick={() => regAtt()}>Register Attestation</button>
+        <button>Attestation </button>
+        <button>Attestation Log</button>
+        <button onClick={() => ID()}>ID</button>
     </div>
     <div>
         <input type="text" id="col1" placeholder='Name'></input>
-        <div id="dol1"></div>
-        <div id='respu'></div>
-        <div id="resp"></div>
+        <input type="text" id="dol1" placeholder="Type"></input>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <input type="text" id="respo1" placeholder="address"></input>
     </div>
     <div>
-    <input type="text" id="col2" placeholder='Birthday'></input>
-        <div id="dol2"></div>
-        <div id='resp'></div>
-        <div id="resp"></div>
+    <input type="text" id="col2" placeholder='Email'></input>
+        <input type="text" id="dol2" placeholder="to"></input>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <div id="respo2"></div>
     </div>
     <div>
-    <input type="text" id="col3" placeholder='Department'></input>
-        <div id="dol3"></div>
-        <div id='resp'></div>
-        <div id="resp"></div>
+    <input type="number" id="col3" placeholder='Number'></input>
+        <div id="dis"></div>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <div id="respo3"></div>
     </div>
     <div>
-    <input type="text" id="col4" placeholder='Email'></input>
-        <div id="dol4"></div>
-        <div id='resp'></div>
-        <div id="resp"></div>
+    <input type="text" id="dis" ></input>
+        <div id="dis"></div>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <div id="respo4"></div>
     </div>
     <div>
-    <input type="text" id="col5" placeholder='location'></input>
-        <div id="dol5"></div>
-        <div id='resp'></div>
-        <div id="resp"></div>
+    <input type="text" id="dis"></input>
+        <div id="dis"></div>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <div id="dis"></div>
     </div>
     <div>
-    <input type="number" id="col6" placeholder='Phone number'></input>
-        <div id="dol6"></div>
-        <div id='resp'></div>
-        <div id="resp"></div>
+    <input type="number" id="dis"></input>
+        <div id="dis"></div>
+        <div id='dis'></div>
+        <div id="dis"></div>
+        <div id="dis"></div>
         
     </div>
+    
     
     
 </div>
