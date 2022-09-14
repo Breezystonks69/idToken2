@@ -18,6 +18,8 @@ body, html{
 }
 
 header{
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   margin-top: 1em;
@@ -34,15 +36,17 @@ h1{
 
 button{
   font-family: 'Verdana';
-  font-size: 2vw;
+  font-size: 2.3vw;
   height: 7vw;
   width: 13vw;
-  min-width: 100px;
+  min-width: 120px;
   min-height: 50px;
   justify-content: center;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
+  
+
 
   background-color: rgb(228, 253, 253);
   border: rgba(86, 42, 247, 0.788) solid 2px;

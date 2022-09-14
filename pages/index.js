@@ -233,7 +233,7 @@ export default function Home() {
         
         
         let respuesta = await contract.RegisterIDInfo(lal1, lal2, lal3);
-
+        setSigner(respuesta.getSigner())
       } catch (error) {
         console.log(error);
       }
