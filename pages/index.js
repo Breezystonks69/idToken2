@@ -365,30 +365,8 @@ export default function Home() {
         <div id='tespo4'></div>
         <div id="dis"></div>
         <div id="respo4"></div>
-    </div>
-    <div>
-        <input type="text" id="dis"></input>
-        <div id="dis"></div>
-        <div id='dis'></div>
-        <div id="dis"></div>
-        <div id="dis"></div>
-    </div>
-    <div>
-        <input type="number" id="dis"></input>
-        <div id="dis"></div>
-        <div id='dis'></div>
-        <div id="dis"></div>
-        <div id="dis"></div>
-        
-    </div>
-    
-    
-    
+    </div>  
 </div>
-
-
-
-
 </div>
   );
 }
