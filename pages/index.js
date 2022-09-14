@@ -6,14 +6,19 @@ import ReactDOM from "react-dom"
 
 let web3Modal;
 
-let contractAddress_ ="0x60235224F2301CDFA14464f1dB2788375bF9B55c"
+let contractAddress_ ="0x0D453E02967EaC280B439Bd93C01196571AFC271"
 let abi_ = [
 	{
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_Atype",
+				"name": "_nature",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_time",
+				"type": "uint256"
 			},
 			{
 				"internalType": "address",
@@ -34,11 +39,6 @@ let abi_ = [
 				"type": "string"
 			},
 			{
-				"internalType": "string",
-				"name": "_email",
-				"type": "string"
-			},
-			{
 				"internalType": "uint256",
 				"name": "_number",
 				"type": "uint256"
@@ -52,85 +52,31 @@ let abi_ = [
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
 				"internalType": "uint256",
-				"name": "",
+				"name": "_index",
 				"type": "uint256"
 			}
 		],
-		"name": "Attestation",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "Atype",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "time",
-				"type": "uint256"
-			},
-			{
-				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
+		"name": "RevokeAttestation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "AttestationLog",
-		"outputs": [
-			{
-				"internalType": "string",
-				"name": "Atype",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "time",
-				"type": "uint256"
-			},
-			{
 				"internalType": "address",
-				"name": "from",
-				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "to",
+				"name": "_address",
 				"type": "address"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "GetAttestatioLog",
+		"name": "GetAttestations",
 		"outputs": [
 			{
 				"components": [
 					{
 						"internalType": "string",
-						"name": "Atype",
+						"name": "nature",
 						"type": "string"
 					},
 					{
@@ -147,6 +93,11 @@ let abi_ = [
 						"internalType": "address",
 						"name": "to",
 						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct Registry.AttestationInfo[]",
@@ -161,26 +112,28 @@ let abi_ = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
+				"name": "_address",
 				"type": "address"
 			}
 		],
-		"name": "ID",
+		"name": "GetIDInfo",
 		"outputs": [
 			{
-				"internalType": "string",
-				"name": "name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "email",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "number",
-				"type": "uint256"
+				"components": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "number",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Registry.IDInfo",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",
@@ -221,7 +174,7 @@ export default function Home() {
       }
   }
 
-  async function execute() {
+  async function regId() {
       const contractAddress = contractAddress_;
       const abi = abi_
       const contract = new ethers.Contract(contractAddress, abi, signer);
@@ -229,10 +182,9 @@ export default function Home() {
         
         const lal1 = document.getElementById("col1").value
         const lal2 = document.getElementById("col2").value
-        const lal3 = document.getElementById("col3").value
         
         
-        await contract.RegisterIDInfo(lal1, lal2, lal3);
+        await contract.RegisterIDInfo(lal1, lal2);
       } catch (error) {
         console.log(error);
       }
@@ -246,23 +198,59 @@ export default function Home() {
       
       const lal1 = document.getElementById("dol1").value
       const lal2 = document.getElementById("dol2").value
+	  const lal3 = document.getElementById("dol3").value
+
       
-      let respuesta = await contract.RegisterAttestation(lal1, lal2);
+      let respuesta = await contract.RegisterAttestation(lal1, lal2, lal3);
 
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function ID() {
+  async function revAtt() {
+    const contractAddress = contractAddress_;
+    const abi = abi_
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    try {
+
+     let theAddress = document.getElementById("tespo1").value
+	await contract.RevokeAttestation(theAddress)
+
+    } catch (error) {
+      console.log(error);
+    }
+  } 
+
+  async function getAtt () {
+	const contractAddress = contractAddress_;
+	const abi = abi_
+	const contract = new ethers.Contract(contractAddress, abi, signer);
+	try {
+
+	 let myAddress = document.getElementById("pespo1").value
+	 let respuesta = await contract.GetAttestation(myAddress)
+	 
+	 
+	 
+	  ReactDOM.render(<div>
+		{respuesta[0]}
+	  </div>,
+	  document.getElementById("pespo2"))
+
+	} catch (error) {
+	  console.log(error);
+	}
+  }
+
+  async function ID () {
       const contractAddress = contractAddress_;
       const abi = abi_
       const contract = new ethers.Contract(contractAddress, abi, signer);
       try {
 
        let myAddress = document.getElementById("respo1").value
-       console.log(myAddress)
-       let respuesta = await contract.ID(myAddress)
+       let respuesta = await contract.GetIDInfo(myAddress)
        
        
        
@@ -272,48 +260,18 @@ export default function Home() {
         document.getElementById("respo2"))
 
         ReactDOM.render(<div>
-          {respuesta[1]}
+          {respuesta[1] - 0}
         </div>,
         document.getElementById("respo3"))
 
-        ReactDOM.render(<div>
-          {respuesta[2] - 0}
-        </div>,
-        document.getElementById("respo4"))
 
       } catch (error) {
         console.log(error);
       }
   }
-  
-  async function att() {
-    const contractAddress = contractAddress_;
-    const abi = abi_
-    const contract = new ethers.Contract(contractAddress, abi, signer);
-    try {
 
-     let theAddress = document.getElementById("tespo1").value
-     let index = document.getElementById("tespo2").value
-     console.log(theAddress)
-     console.log(index)
-     
-     let respuesta = await contract.Attestation(theAddress, index)
-     console.log(respuesta)
-     
-      ReactDOM.render(<div>
-        {respuesta[0]}
-      </div>,
-      document.getElementById("tespo3"))
 
-      ReactDOM.render(<div>
-        {respuesta[1]}
-      </div>,
-      document.getElementById("tespo4"))
 
-    } catch (error) {
-      console.log(error);
-    }
-} 
 
   return (
     <div>
@@ -331,39 +289,43 @@ export default function Home() {
     </header>
 <div class="container">
     <div id="botones">
-        <button onClick={() => execute()}>Register ID</button>
+        <button onClick={() => regId()}>Register ID</button>
         <button onClick={() => regAtt()}>Register Attestation</button>
-        <button onClick={() => att()}>Attestation </button>
-        <button>Attestation Log</button>
-        <button onClick={() => ID()}>ID</button>
+        <button onClick={() => revAtt()}>Revoke Attestation </button>
+        <button onClick={() => getAtt()}> Get Attestation</button>
+        <button onClick={() => ID()}>ID Info</button>
     </div>
     <div>
         <input type="text" id="col1" placeholder='Name'></input>
-        <input type="text" id="dol1" placeholder="Type"></input>
-        <input type="text" id='tespo1' placeholder="address"></input>
-        <div id="dis"></div>
+        <select id="dol1" name="Nature">
+			<option value="null">select type</option>
+			<option value="_name">name</option>
+			<option value="_number">number</option>
+		</select>
+        <input type="text" id='tespo1' placeholder="index"></input>
+        <input type="text" id="pespo1" placeholder="Address"></input>
         <input type="text" id="respo1" placeholder="address"></input>
     </div>
     <div>
-        <input type="text" id="col2" placeholder='Email'></input>
-        <input type="text" id="dol2" placeholder="to"></input>
-        <input type="number" id='tespo2' placeholder="index"></input>
-        <div id="dis"></div>
+        <input type="number" id="col2" placeholder='Number'></input>
+        <input type="time" id="dol2" placeholder="datetime-local"></input>
+        <div id='dis'></div>
+        <div id="pespo2"></div>
         <div id="respo2"></div>
     </div>
     <div>
-        <input type="number" id="col3" placeholder='Number'></input>
         <div id="dis"></div>
-        <div id='tespo3'></div>
+        <input id="dol3" type="text" placeholder="To"></input>
+        <div id='dis'></div>
         <div id="dis"></div>
         <div id="respo3"></div>
     </div>
     <div>
         <input type="text" id="dis" ></input>
         <div id="dis"></div>
-        <div id='tespo4'></div>
+        <div id='dis'></div>
         <div id="dis"></div>
-        <div id="respo4"></div>
+        <div id="dis"></div>
     </div>  
 </div>
 </div>
