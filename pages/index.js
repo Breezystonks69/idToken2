@@ -200,7 +200,9 @@ export default function Home() {
       const lal2 = document.getElementById("dol2").value
 	  const lal3 = document.getElementById("dol3").value
 
-      
+      console.log(lal1)
+	  console.log(lal2)
+	  console.log(lal3)
       let respuesta = await contract.RegisterAttestation(lal1, lal2, lal3);
 
     } catch (error) {
@@ -229,12 +231,13 @@ export default function Home() {
 	try {
 
 	 let myAddress = document.getElementById("pespo1").value
-	 let respuesta = await contract.GetAttestation(myAddress)
+	 let respuesta = await contract.GetAttestations(myAddress)
 	 
+	 let papapa = respuesta[0]
 	 
 	 
 	  ReactDOM.render(<div>
-		{respuesta[0]}
+		{papapa[3]}
 	  </div>,
 	  document.getElementById("pespo2"))
 
@@ -308,7 +311,7 @@ export default function Home() {
     </div>
     <div>
         <input type="number" id="col2" placeholder='Number'></input>
-        <input type="time" id="dol2" placeholder="datetime-local"></input>
+        <input type="number" id="dol2" placeholder="time"></input>
         <div id='dis'></div>
         <div id="pespo2"></div>
         <div id="respo2"></div>
